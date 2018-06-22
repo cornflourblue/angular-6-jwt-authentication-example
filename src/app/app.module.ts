@@ -9,9 +9,7 @@ import { fakeBackendProvider } from './_helpers';
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
 
-import { AuthGuard } from './_guards';
-import { JwtInterceptor } from './_helpers';
-import { AuthenticationService, UserService } from './_services';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 
@@ -28,14 +26,8 @@ import { LoginComponent } from './login';
         LoginComponent
     ],
     providers: [
-        AuthGuard,
-        AuthenticationService,
-        UserService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: JwtInterceptor,
-            multi: true
-        },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
         fakeBackendProvider

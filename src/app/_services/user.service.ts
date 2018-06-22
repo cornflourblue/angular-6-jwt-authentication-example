@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient) { }
 

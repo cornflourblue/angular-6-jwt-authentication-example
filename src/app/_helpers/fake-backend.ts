@@ -21,7 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: { token: 'fake-jwt-token' } }));
                 } else {
                     // else return 400 bad request
-                    return throwError('Username or password is incorrect');
+                    return throwError({ error: { message: 'Username or password is incorrect' } });
                 }
             }
 
@@ -32,7 +32,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
                 } else {
                     // return 401 not authorised if token is null or invalid
-                    return throwError('Unauthorised');
+                    return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
 
